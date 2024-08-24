@@ -37,14 +37,24 @@ export class OrderConfigPage implements OnInit  {
     });
   }
 
-  onSubmit(){
-    let form =this.form.value
-    if(this.todo){
-      this.todo.title=form.title;
-      this.todo.description=form.description;
-      this.todo.date=new Date()
-    }
-    this.navCtrl.navigateBack('/home');
+onSubmit() {
+  let form = this.form.value;
+
+  if (this.todo) {
+    this.todo.title = form.title;
+    this.todo.description = form.description;
+    this.todo.date = new Date();
+  } else {
+    const newTodo: Todo = {
+      title: form.title,
+      description: form.description,
+      date: new Date()
+    };
+    this.DataService.todos.push(newTodo); // إضافة الملاحظة الجديدة إلى قائمة todos
   }
+
+  this.navCtrl.navigateBack('/home');
+}
+
 
 }
